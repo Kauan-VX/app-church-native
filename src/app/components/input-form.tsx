@@ -38,8 +38,8 @@ export const ControlledInput = ({
   ...rest
 }: ControllerProps) => {
   return (
-    <View>
-      <Text>{label}</Text>
+    <View className="flex flex-col gap-1">
+      <Text className="font-semibold text-xl ml-4">{label}</Text>
       <Controller
         control={control}
         name={name}
@@ -54,7 +54,7 @@ export const ControlledInput = ({
         )}
       />
       {error && (
-        <Text style={{ color: "#ff6666", fontWeight: "bold", marginTop: 5 }}>
+        <Text className="color-red-500 font-semibold ml-4">
           {error.message}
         </Text>
       )}

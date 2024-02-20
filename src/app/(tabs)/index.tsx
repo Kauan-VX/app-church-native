@@ -1,9 +1,13 @@
+import { IToken } from "@/models/user";
 import { yupResolver } from "@hookform/resolvers/yup";
+import axios from "axios";
 import { Link } from "expo-router";
-import { Controller, useForm } from "react-hook-form";
-import { Text, TextInput, TouchableOpacity, View } from "react-native";
+import md5 from "md5";
+import { SubmitHandler, useForm } from "react-hook-form";
+import { Alert, Text, TouchableOpacity, View } from "react-native";
 import * as yup from "yup";
 import CardLogin from "../components/card-login";
+import { ControlledInput } from "../components/input-form";
 
 type IFormLogin = {
   username: string;
@@ -28,9 +32,29 @@ export default function Login() {
     resolver: yupResolver(schema),
   });
 
-  function handleLogin(data: IFormLogin) {
-    console.log(data);
-  }
+  const handleLogin: SubmitHandler<IFormLogin> = async (data) => {
+    try {
+      const { username, password } = data;
+      const passwordMD5 = md5(password).toString().toUpperCase();
+      const response = await axios.post<IToken>(
+        "https://api.petsimples.com/core/auth-company/",
+        {
+          username,
+          password: passwordMD5,
+        }
+      );
+      if (response.status === 200) {
+      } else {
+        Alert.alert(
+          "Erro",
+          "Não foi possível fazer login. Verifique suas credenciais."
+        );
+      }
+    } catch (error) {
+      Alert.alert("Erro");
+      console.log(error);
+    }
+  };
 
   const IconLogin = [
     {
@@ -49,30 +73,31 @@ export default function Login() {
         <Text className={styles.title}>Iniciar sessão</Text>
         <Text className={styles.subtitle}>Olá, bem-vindo à sua conta</Text>
       </View>
-      <View className="bg-light-background shadow-lg gap-4 rounded-[2rem] p-4 flex-1 flex flex-col">
-        <Controller
-          control={control}
-          name="password"
-          rules={{}}
-          render={({ field: { onChange, onBlur } }) => (
-            <TextInput
-              placeholderTextColor="#64748b"
-              className=" p-4 bg-slate-200 font-semibold rounded-xl text-gray-700"
-              placeholder="Insira sua senha"
-              onChangeText={onChange}
-              secureTextEntry
-              onBlur={onBlur}
-            />
-          )}
-        />
-        {errors.password && (
-          <Text className="color-red-600 font-semibold">
-            {errors.password?.message}
-          </Text>
-        )}
+      <View className="bg-light-background shadow-lg  rounded-[2rem] p-6 flex-1 flex flex-col">
+        <View className="flex flex-col gap-2">
+          <ControlledInput
+            type="email"
+            label="E-mail"
+            name="username"
+            placeholder="Insira seu e-mail"
+            control={control}
+            error={errors.username}
+          />
 
-        <View className="flex-row justify-end my-4 color-red-600">
-          <Link href="/">Recuperar senha</Link>
+          <ControlledInput
+            type="email"
+            label="Senha"
+            name="password"
+            placeholder="Insira sua senha"
+            control={control}
+            error={errors.password}
+          />
+
+          <View className="flex-row justify-end">
+            <Link className="underline text-base font-semibold" href="/">
+              Recuperar senha
+            </Link>
+          </View>
         </View>
 
         <View className="flex-row justify-center my-10">
@@ -95,8 +120,8 @@ export default function Login() {
 }
 
 const styles = {
-  button: "items-center bg-dark-background rounded-[28px] shadow-md p-4",
-  buttonText: "text-white text-lg font-semibold text-center ",
+  button: "items-center bg-dark-background rounded-[28px] shadow-md p-4  mt-8",
+  buttonText: "text-white text-lg font-semibold text-center",
   main: "flex-1 bg-dark-background",
   title: "text-[64px] text-white font-semibold",
   subtitle: "text-4xl text-gray-700 text-white  text-center",
