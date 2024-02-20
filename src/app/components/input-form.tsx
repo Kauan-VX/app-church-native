@@ -1,27 +1,42 @@
-import React from "react";
-import { Controller } from "react-hook-form";
+import React, { ChangeEvent } from "react";
+import { Control, Controller, FieldError } from "react-hook-form";
 import { Text, TextInput, View } from "react-native";
 
-interface Props {
-  control: any;
-  name: string;
-  label: string;
+export interface InputProps {
+  width?: string;
+  type:
+    | "text"
+    | "email"
+    | "password"
+    | "number"
+    | "search"
+    | "checkbox"
+    | "button";
   placeholder: string;
-  onChangeText: (text: string) => void;
-  onBlur: () => void;
-  secureTextEntry?: boolean;
-  error?: string;
+  autoComplete?: string;
+  required?: boolean;
+  onChange?: (event: ChangeEvent<HTMLInputElement>) => void;
+  value?: string;
 }
 
-const FormTextInput: React.FC<Props> = ({
+type ControllerProps = InputProps & {
+  control: Control<any>;
+  onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  value?: string;
+  name: string;
+  error?: FieldError;
+  label: string;
+  placeholder: string;
+};
+
+export const ControlledInput = ({
   control,
   name,
-  placeholder,
-  onBlur,
   label,
-  secureTextEntry = false,
+  placeholder,
   error,
-}) => {
+  ...rest
+}: ControllerProps) => {
   return (
     <View>
       <Text>{label}</Text>
@@ -35,17 +50,14 @@ const FormTextInput: React.FC<Props> = ({
             placeholderTextColor="#64748b"
             onChangeText={onChange}
             onBlur={onBlur}
-            secureTextEntry={secureTextEntry}
           />
         )}
       />
       {error && (
         <Text style={{ color: "#ff6666", fontWeight: "bold", marginTop: 5 }}>
-          {error}
+          {error.message}
         </Text>
       )}
     </View>
   );
 };
-
-export default FormTextInput;
