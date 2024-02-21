@@ -27,6 +27,7 @@ type ControllerProps = InputProps & {
   error?: FieldError;
   label: string;
   placeholder: string;
+  secureTextEntry?: boolean;
 };
 
 export const ControlledInput = ({
@@ -34,6 +35,7 @@ export const ControlledInput = ({
   name,
   label,
   placeholder,
+  secureTextEntry,
   error,
   ...rest
 }: ControllerProps) => {
@@ -50,6 +52,7 @@ export const ControlledInput = ({
             placeholderTextColor="#64748b"
             onChangeText={onChange}
             onBlur={onBlur}
+            secureTextEntry={secureTextEntry}
           />
         )}
       />

@@ -1,13 +1,13 @@
 import { IToken } from "@/models/user";
 import { yupResolver } from "@hookform/resolvers/yup";
 import axios from "axios";
-import { Link } from "expo-router";
+import { Link, router } from "expo-router";
 import md5 from "md5";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { Alert, Text, TouchableOpacity, View } from "react-native";
 import * as yup from "yup";
-import CardLogin from "../components/card-login";
-import { ControlledInput } from "../components/input-form";
+import CardLogin from "./components/card-login";
+import { ControlledInput } from "./components/input-form";
 
 type IFormLogin = {
   username: string;
@@ -44,6 +44,7 @@ export default function Login() {
         }
       );
       if (response.status === 200) {
+        router.navigate("/news");
       } else {
         Alert.alert(
           "Erro",
@@ -91,6 +92,7 @@ export default function Login() {
             placeholder="Insira sua senha"
             control={control}
             error={errors.password}
+            secureTextEntry={true}
           />
 
           <View className="flex-row justify-end">
