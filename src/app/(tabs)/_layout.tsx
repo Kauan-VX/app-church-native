@@ -13,8 +13,8 @@ export default function TabRoutesLayout() {
     <GestureHandlerRootView style={{ flex: 1 }}>
       <Tabs
         screenOptions={{
-          headerShown: false,
-          headerTintColor: theme.colors.white,
+          // headerShown: false,
+          headerTintColor: theme.colors.black,
           tabBarActiveTintColor: theme.colors.black,
           tabBarInactiveTintColor: theme.colors.gray[600],
           tabBarStyle: {

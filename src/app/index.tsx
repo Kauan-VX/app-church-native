@@ -74,7 +74,7 @@ export default function Login() {
         <Text className={styles.title}>Iniciar sessão</Text>
         <Text className={styles.subtitle}>Olá, bem-vindo à sua conta</Text>
       </View>
-      <View className="bg-light-background shadow-lg  rounded-[2rem] p-6 flex-1 flex flex-col">
+      <View className="bg-light-background shadow-lg  rounded-t-[2rem] p-6 flex-1 flex flex-col">
         <View className="flex flex-col gap-2">
           <ControlledInput
             type="email"
