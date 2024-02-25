@@ -1,7 +1,7 @@
 import { FlashList } from "@shopify/flash-list";
 import React from "react";
 import { View } from "react-native";
-import CardEvent, { ICardEvent } from "../components/card-event";
+import CardEvent, { ICardEvent } from "../components/event/card-event";
 
 const Events: ICardEvent[] = [
   {
@@ -83,6 +83,7 @@ export default function News() {
     <View className="bg-light-background h-full w-full pt-4">
       <FlashList
         data={Events}
+        estimatedItemSize={60}
         renderItem={({ item, index }) => (
           <View className="flex flex-col mb-72 px-4">
             <CardEvent
