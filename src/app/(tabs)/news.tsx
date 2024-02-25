@@ -83,9 +83,9 @@ export default function News() {
     <View className="bg-light-background h-full w-full pt-4">
       <FlashList
         data={Events}
-        estimatedItemSize={60}
+        estimatedItemSize={320}
         renderItem={({ item, index }) => (
-          <View className="flex flex-col mb-72 px-4">
+          <View className="flex flex-col mb-[22rem] px-4">
             <CardEvent
               key={index}
               date={item.date}

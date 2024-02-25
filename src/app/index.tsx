@@ -4,7 +4,8 @@ import axios from "axios";
 import { Link, router } from "expo-router";
 import md5 from "md5";
 import { SubmitHandler, useForm } from "react-hook-form";
-import { Alert, Text, TouchableOpacity, View } from "react-native";
+import { Text, TouchableOpacity, View } from "react-native";
+import Toast from "react-native-toast-message";
 import * as yup from "yup";
 import CardLogin from "./components/card-login";
 import { ControlledInput } from "./components/input-form";
@@ -23,7 +24,6 @@ const schema = yup.object({
 });
 
 export default function Login() {
-  const teste = "testeeee";
   const {
     control,
     handleSubmit,
@@ -44,16 +44,25 @@ export default function Login() {
         }
       );
       if (response.status === 200) {
+        Toast.show({
+          type: "success",
+          text1: "Olá",
+          text2: "Seu login foi aprovado com sucesso",
+        });
         router.navigate("/news");
       } else {
-        Alert.alert(
-          "Erro",
-          "Não foi possível fazer login. Verifique suas credenciais."
-        );
+        Toast.show({
+          type: "error",
+          text1: "Erro",
+          text2: "E-mail ou senha incorretos",
+        });
       }
     } catch (error) {
-      Alert.alert("Erro");
-      console.log(error);
+      Toast.show({
+        type: "error",
+        text1: "Erro",
+        text2: "E-mail ou senha incorretos",
+      });
     }
   };
 
@@ -86,7 +95,7 @@ export default function Login() {
           />
 
           <ControlledInput
-            type="email"
+            type="number"
             label="Senha"
             name="password"
             placeholder="Insira sua senha"

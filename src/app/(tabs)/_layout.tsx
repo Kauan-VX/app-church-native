@@ -6,15 +6,20 @@ import {
   MaterialIcons,
 } from "@expo/vector-icons";
 import { Tabs } from "expo-router";
+import { StatusBar } from "expo-status-bar";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
 
 export default function TabRoutesLayout() {
   return (
     <GestureHandlerRootView style={{ flex: 1 }}>
+      <StatusBar style="inverted" />
       <Tabs
         screenOptions={{
           // headerShown: false,
-          headerTintColor: theme.colors.black,
+          // headerTintColor: theme.colors.black,
+          headerStyle: {
+            backgroundColor: theme.colors.white,
+          },
           tabBarActiveTintColor: theme.colors.black,
           tabBarInactiveTintColor: theme.colors.gray[600],
           tabBarStyle: {
@@ -23,6 +28,9 @@ export default function TabRoutesLayout() {
             shadowColor: "#00000a",
             backgroundColor: theme.colors.white,
             paddingBottom: 20,
+          },
+          tabBarIconStyle: {
+            color: theme.colors.black, // Defina uma cor diferente para os ícones
           },
           tabBarLabelStyle: {
             color: theme.colors.white,
