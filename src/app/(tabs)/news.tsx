@@ -85,7 +85,7 @@ export default function News() {
         data={Events}
         estimatedItemSize={320}
         renderItem={({ item, index }) => (
-          <View className="flex flex-col mb-[22rem] px-4">
+          <View className="flex flex-col mb-[23rem] px-4">
             <CardEvent
               key={index}
               date={item.date}
