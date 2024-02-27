@@ -1,13 +1,10 @@
 import { theme } from "@/theme/Index";
-import {
-  FontAwesome6,
-  Foundation,
-  Ionicons,
-  MaterialIcons,
-} from "@expo/vector-icons";
+import { FontAwesome6, Foundation, MaterialIcons } from "@expo/vector-icons";
 import { Tabs } from "expo-router";
 import { StatusBar } from "expo-status-bar";
+import React from "react";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
+import Avatar from "../components/avatar";
 
 export default function TabRoutesLayout() {
   return (
@@ -67,11 +64,15 @@ export default function TabRoutesLayout() {
           }}
         />
         <Tabs.Screen
-          name="settings"
+          name="user"
           options={{
+            headerShown: false,
             title: "Perfil",
             tabBarIcon: ({ size, color }) => (
-              <Ionicons name="person-outline" size={size} color={color} />
+              <Avatar
+                selected
+                source={{ uri: "https://github.com/Kauan-VX.png" }}
+              />
             ),
           }}
         />
