@@ -1,39 +1,10 @@
-import React, { useState } from "react";
-import { Dimensions, FlatList, Text, View } from "react-native";
-import Dot from "../components/carousel/dots";
-import CardEvent, { ICardEvent } from "../components/event/card-event";
+import React from "react";
+import { View } from "react-native";
+import { ScrollView } from "react-native-gesture-handler";
+import CarouselEvents from "../components/carousel/carousel";
+import { ICardEvent } from "../components/event/card-event";
 
 const Events: ICardEvent[] = [
-  {
-    title: "Aviva Macapa",
-    link: "https://alynekaiser.com.br/wp-content/uploads/2021/10/WhatsApp-Image-2021-09-29-at-17.35.40-e1633884756748-780x470.jpeg",
-    date: "22/05/24",
-    hour: "17:30",
-    locale: "Macapa",
-    price: "Gratuito",
-    type: "Somente para membros",
-  },
-  {
-    title: "Aviva Macapa",
-    link: "https://alynekaiser.com.br/wp-content/uploads/2021/10/WhatsApp-Image-2021-09-29-at-17.35.40-e1633884756748-780x470.jpeg",
-    date: "22/05/24",
-    hour: "17:30",
-    locale: "Macapa",
-    price: "Gratuito",
-    type: "Somente para membros",
-  },
-  {
-    title: "Aviva Macapa",
-    link: "https://alynekaiser.com.br/wp-content/uploads/2021/10/WhatsApp-Image-2021-09-29-at-17.35.40-e1633884756748-780x470.jpeg",
-    date: "22/05/24",
-    hour: "17:30",
-    locale: "Macapa",
-    price: "Gratuito",
-    type: "Somente para membros",
-  },
-];
-
-const Pgs: any[] = [
   {
     id: 1,
     title: "Aviva Macapa",
@@ -47,7 +18,40 @@ const Pgs: any[] = [
   {
     id: 2,
     title: "Aviva Macapa",
-    link: "https://agencia.ac.gov.br/wp-content/uploads/2023/08/AF281FC4-1434-4191-823A-CDB60910F24E-2.jpeg",
+    link: "https://www.redebrasilatual.com.br/wp-content/uploads/2019/11/gospel.jpg",
+    date: "22/05/24",
+    hour: "17:30",
+    locale: "Macapa",
+    price: "Gratuito",
+    type: "Somente para membros",
+  },
+  {
+    id: 3,
+    title: "Esther Marcos",
+    link: "https://showgospel.com.br/wp-content/uploads/2023/07/banner-revista-show-gospel-edicao-76-redim-1-2.jpg",
+    date: "22/05/24",
+    hour: "17:30",
+    locale: "Macapa",
+    price: "Gratuito",
+    type: "Somente para membros",
+  },
+];
+
+const Pgs: ICardEvent[] = [
+  {
+    id: 1,
+    title: "Aviva Macapa",
+    link: "https://files.adventistas.org/institucional/pt/sites/8/2013/05/topo-pg-pt.jpg",
+    date: "22/05/24",
+    hour: "17:30",
+    locale: "Macapa",
+    price: "Gratuito",
+    type: "Somente para membros",
+  },
+  {
+    id: 2,
+    title: "Aviva Macapa",
+    link: "https://igrejamultiplicadora.org.br/new/wp-content/uploads/2017/02/cel1-768x425.jpg",
     date: "22/05/24",
     hour: "17:30",
     locale: "Macapa",
@@ -57,7 +61,40 @@ const Pgs: any[] = [
   {
     id: 3,
     title: "Aviva Macapa",
-    link: "https://cajamar.sp.gov.br/noticias/wp-content/uploads/sites/2/2022/10/image-10.png",
+    link: "https://ipgracas.org.br/wp-content/uploads/2018/04/PequenoGrupo1-1060x655.jpg",
+    date: "22/05/24",
+    hour: "17:30",
+    locale: "Macapa",
+    price: "Gratuito",
+    type: "Somente para membros",
+  },
+];
+
+const Cults: ICardEvent[] = [
+  {
+    id: 1,
+    title: "Aviva Macapa",
+    link: "https://cdn6.campograndenews.com.br/uploads/noticias/2020/04/02/25lfui8wn3c0o.jpg",
+    date: "22/05/24",
+    hour: "17:30",
+    locale: "Macapa",
+    price: "Gratuito",
+    type: "Somente para membros",
+  },
+  {
+    id: 2,
+    title: "Aviva Macapa",
+    link: "https://gncnews.com.br/img/crop?img=d24ae76c829e14f6c7c045b5a9ea8ec1.jpg&w=800&h=400&fit=crop&fm=jpq&q=90",
+    date: "22/05/24",
+    hour: "17:30",
+    locale: "Macapa",
+    price: "Gratuito",
+    type: "Somente para membros",
+  },
+  {
+    id: 3,
+    title: "Aviva Macapa",
+    link: "https://1.bp.blogspot.com/-XbgiFMTHRZ4/V-KLjNDSJII/AAAAAAAACwg/RmFx8dRYeBcCwNAresvQwxtMv6qDxkGPACLcB/s1600/IMG_9275.jpg",
     date: "22/05/24",
     hour: "17:30",
     locale: "Macapa",
@@ -67,45 +104,13 @@ const Pgs: any[] = [
 ];
 
 export default function News() {
-  const { width } = Dimensions.get("window");
-  const [currentIndex, setCurrentIndex] = useState(0);
   return (
-    <View className="bg-light-background flex-1 pt-4">
-      <View className="my-4 ml-4">
-        <Text className="text-4xl font-semibold">Eventos</Text>
-      </View>
-      <FlatList
-        style={{ height: 600, flexGrow: 0 }}
-        keyExtractor={(_, index) => `list_item${index}`}
-        data={Pgs}
-        horizontal={true}
-        scrollEventThrottle={16}
-        onMomentumScrollEnd={(event) => {
-          setCurrentIndex(event.nativeEvent.contentOffset.x / width);
-        }}
-        showsHorizontalScrollIndicator={false}
-        pagingEnabled={true}
-        bounces={false}
-        renderItem={({ item, index }) => (
-          <CardEvent
-            key={index}
-            date={item.date}
-            hour={item.hour}
-            locale={item.locale}
-            link={item.link}
-            type={item.type}
-            price={item.price}
-            title={item.title}
-          />
-        )}
-      />
-      {Pgs.length > 1 ? (
-        <View className=" flex-row justify-center items-center my-8">
-          {Pgs.map((_, i) => (
-            <Dot index={i} paginationIndex={currentIndex} key={i} />
-          ))}
-        </View>
-      ) : null}
+    <View className="bg-light-background flex-1 ">
+      <ScrollView className="overflow-hidden">
+        <CarouselEvents data={Pgs} title="Pg(s)" />
+        <CarouselEvents data={Events} title="Eventos da Igreja" />
+        <CarouselEvents data={Cults} title="Cultos" />
+      </ScrollView>
     </View>
   );
 }
