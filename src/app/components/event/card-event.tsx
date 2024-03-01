@@ -28,7 +28,7 @@ export default function CardEvent({
 }: ICardEvent) {
   return (
     <GestureHandlerRootView style={{ flex: 1 }}>
-      <View className="flex-col bg-light-background shadow-md border-cyan-100 w-full  h-[19rem] rounded-xl">
+      <View className="flex-col bg-light-background shadow-md border-cyan-100 w-screen  h-[19rem] rounded-xl">
         <View className="rounded-t-xl">
           <Image
             className="w-full h-full rounded-t-xl object-cover"

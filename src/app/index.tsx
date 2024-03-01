@@ -4,7 +4,7 @@ import axios from "axios";
 import { Link, router } from "expo-router";
 import md5 from "md5";
 import { SubmitHandler, useForm } from "react-hook-form";
-import { Text, TouchableOpacity, View } from "react-native";
+import { Keyboard, Text, TouchableOpacity, View } from "react-native";
 import Toast from "react-native-toast-message";
 import * as yup from "yup";
 import CardLogin from "./components/card-login";
@@ -44,6 +44,7 @@ export default function Login() {
         }
       );
       if (response.status === 200) {
+        Keyboard.dismiss();
         Toast.show({
           type: "success",
           text1: "Olá",
